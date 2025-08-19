@@ -18,6 +18,7 @@ export class homepage_locator {
 	readonly Sort_Dropdown: Locator;
 	readonly Field_MainSearchBar: Locator;
 	readonly Link_FirstSearchResult: Locator;
+	readonly Text_HomepageProductName: Locator;
 
 	constructor(public readonly page: Page) {
 		this.Button_Login = page.locator(
@@ -30,6 +31,9 @@ export class homepage_locator {
 			`xpath=//div[contains(@class, 'heading-1 banner__title') and normalize-space()='Kursi Makan']`
 		);
 		this.Val_ProductCard = page.locator(".product-card");
+		this.Text_HomepageProductName = page.locator(
+			"span[id='homepagePromoBrandProductName']"
+		);
 		this.Span_Harga = this.filterSpan("Harga");
 		this.Field_HargaMinimum = page.locator(
 			`xpath=//input[@class='form-input' and @placeholder='Harga Minimum']`

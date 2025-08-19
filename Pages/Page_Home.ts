@@ -61,4 +61,9 @@ export class HomePage {
 		await this.homepagelocator.Field_MainSearchBar.fill(`${text}`);
 		await this.homepagelocator.Link_FirstSearchResult.click();
 	}
+
+	async getHomepageProductNames(): Promise<string[]> {
+		await this.homepagelocator.Text_HomepageProductName.last().isVisible();
+		return this.homepagelocator.Text_HomepageProductName.allInnerTexts();
+	}
 }
