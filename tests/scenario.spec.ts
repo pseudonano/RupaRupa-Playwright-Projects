@@ -22,7 +22,9 @@ test.describe(`Product search and filtering workflow`, () => {
 		await homePage.homepagelocator.ThirdChild_KursiMakan.click();
 		await homePage.setFilterHarga("100000", "900000");
 		await homePage.setFilterLokasi();
+		// await homePage.page.pause();
 		await homePage.setFilterBrand();
+		// await homePage.page.pause();
 		const apiProducts = await getProductsAPI(
 			request,
 			"https://beta.wapi.ruparupastg.my.id/product/v2/category/furniture/kursi/kursi-makan.html?size=50&sort=matching&categoryId=6941&locations=490,910&cityid=910&provinceid=490&brands=157&isRuleBased=false&fr_om=0&lat=-6.243373&lon=106.784425"
@@ -32,6 +34,8 @@ test.describe(`Product search and filtering workflow`, () => {
 			{ timeout: 20000 }
 		);
 		const uiProducts = await homePage.getHomepageProductNames();
+		await homePage.page.waitForLoadState("networkidle");
+
 		const normalize = (arr: string[]) =>
 			arr.map((p) => p.trim().toLowerCase()).sort();
 		expect(normalize(uiProducts)).toEqual(apiProducts.sort());
@@ -45,6 +49,7 @@ test.describe(`Product search and filtering workflow`, () => {
 		await homePage.setFilterLokasi();
 		await homePage.setFilterBrand();
 		await homePage.sortDropdown("Harga Terendah");
+		// await homePage.page.pause();
 		const apiProducts = await getProductsAPI(
 			request,
 			"https://beta.wapi.ruparupastg.my.id/product/v2/category/furniture/kursi/kursi-makan.html?size=50&sort=lowestPrice&categoryId=6941&locations=490,910&cityid=910&provinceid=490&brands=157&isRuleBased=false&from=0&lat=-6.243373&lon=106.784425"
@@ -54,6 +59,8 @@ test.describe(`Product search and filtering workflow`, () => {
 			{ timeout: 20000 }
 		);
 		const uiProducts = await homePage.getHomepageProductNames();
+		await homePage.page.waitForLoadState("networkidle");
+
 		const normalize = (arr: string[]) =>
 			arr.map((p) => p.trim().toLowerCase()).sort();
 		expect(normalize(uiProducts)).toEqual(apiProducts.sort());

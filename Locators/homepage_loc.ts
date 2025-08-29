@@ -45,8 +45,9 @@ export class homepage_locator {
 		this.Val_LihatSemuaLokasi = page.locator(
 			`xpath=//button[normalize-space()='Lihat Semua Lokasi']`
 		);
-		this.Check_DKIjakarta = page.locator(`xpath=//input[@id='undefined-0']`);
-		this.Check_KotaTangerang = page.locator(`xpath=//input[@id='undefined-1']`);
+		this.Check_DKIjakarta = page.getByLabel(`Dki Jakarta`).first();
+		this.Check_KotaTangerang = page.getByLabel(`Kota. Tangerang`).first();
+
 		this.Span_Brand = this.filterSpan("Brand");
 		this.Check_Informa = page.locator(
 			`xpath=//input[@id='brand-filter-modal-2']`

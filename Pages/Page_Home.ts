@@ -35,19 +35,20 @@ export class HomePage {
 		await expect(this.homepagelocator.Val_LihatSemuaLokasi).toBeVisible({
 			timeout: 50 * 1000,
 		});
-		await this.homepagelocator.Check_DKIjakarta.first().evaluate(
-			(node) => node.onclick
-		);
-		await this.homepagelocator.Check_KotaTangerang.first().evaluate(
-			(node) => node.onclick
-		);
+		await expect(this.homepagelocator.Check_DKIjakarta).toBeVisible();
+		await this.homepagelocator.Check_DKIjakarta.click();
+		// await expect(this.homepagelocator.Check_DKIjakarta).toBeChecked();
+
+		await expect(this.homepagelocator.Check_KotaTangerang).toBeVisible();
+		await this.homepagelocator.Check_KotaTangerang.click();
+		// await expect(this.homepagelocator.Check_KotaTangerang).toBeChecked();
 	}
 
 	async setFilterBrand() {
 		await this.homepagelocator.Span_Brand.click();
-		await this.homepagelocator.Check_Informa.first().evaluate(
-			(node) => node.onclick
-		);
+		await expect(this.homepagelocator.Check_Informa).toBeVisible();
+		await this.homepagelocator.Check_Informa.click();
+		await expect(this.homepagelocator.Check_Informa).toBeChecked();
 	}
 
 	async sortDropdown(text: string) {
@@ -64,6 +65,6 @@ export class HomePage {
 
 	async getHomepageProductNames(): Promise<string[]> {
 		await this.homepagelocator.Text_HomepageProductName.last().isVisible();
-		return this.homepagelocator.Text_HomepageProductName.allInnerTexts();
+		return this.homepagelocator.Text_HomepageProductName.allTextContents();
 	}
 }
