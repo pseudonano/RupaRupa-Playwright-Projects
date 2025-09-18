@@ -3,11 +3,11 @@ import { getProductsAPI } from "../utils/utils";
 
 test.describe(`Product search and filtering workflow`, () => {
 	test.beforeEach(async ({ homePage }) => {
-		await homePage.page.goto("https://beta.www.ruparupastg.my.id/");
+		await homePage.page.goto("BASE_URL_NEEDED");
 	});
 	test(`Scenario #1-1`, async ({ homePage, loginPage }) => {
 		await homePage.navigateToLoginPage();
-		await loginPage.performLogin("shimarin@tes.cc", "Abcd1234!");
+		await loginPage.performLogin("USERNAME_NEEDED", "PASSWORD_NEEDED");
 		await homePage.hoverMenu("Furnitur");
 		await homePage.homepagelocator.ThirdChild_KursiMakan.click();
 		await expect(homePage.homepagelocator.Val_Banner_KursiMakan).toBeVisible({
@@ -17,7 +17,7 @@ test.describe(`Product search and filtering workflow`, () => {
 	});
 	test(`Scenario #1-2`, async ({ homePage, loginPage, request }) => {
 		await homePage.navigateToLoginPage();
-		await loginPage.performLogin("shimarin@tes.cc", "Abcd1234!");
+		await loginPage.performLogin("USERNAME_NEEDED", "PASSWORD_NEEDED");
 		await homePage.hoverMenu("Furnitur");
 		await homePage.homepagelocator.ThirdChild_KursiMakan.click();
 		await homePage.setFilterHarga("100000", "900000");
@@ -25,10 +25,7 @@ test.describe(`Product search and filtering workflow`, () => {
 		// await homePage.page.pause();
 		await homePage.setFilterBrand();
 		// await homePage.page.pause();
-		const apiProducts = await getProductsAPI(
-			request,
-			"https://beta.wapi.ruparupastg.my.id/product/v2/category/furniture/kursi/kursi-makan.html?size=50&sort=matching&categoryId=6941&locations=490,910&cityid=910&provinceid=490&brands=157&isRuleBased=false&fr_om=0&lat=-6.243373&lon=106.784425"
-		);
+		const apiProducts = await getProductsAPI(request, "API_URL_NEEDED");
 		await expect(homePage.homepagelocator.Text_HomepageProductName).toHaveCount(
 			apiProducts.length,
 			{ timeout: 20000 }
@@ -42,7 +39,7 @@ test.describe(`Product search and filtering workflow`, () => {
 	});
 	test(`Scenario #1-3`, async ({ homePage, loginPage, request }) => {
 		await homePage.navigateToLoginPage();
-		await loginPage.performLogin("shimarin@tes.cc", "Abcd1234!");
+		await loginPage.performLogin("USERNAME_NEEDED", "PASSWORD_NEEDED");
 		await homePage.hoverMenu("Furnitur");
 		await homePage.homepagelocator.ThirdChild_KursiMakan.click();
 		await homePage.setFilterHarga("100000", "900000");
@@ -50,10 +47,7 @@ test.describe(`Product search and filtering workflow`, () => {
 		await homePage.setFilterBrand();
 		await homePage.sortDropdown("Harga Terendah");
 		// await homePage.page.pause();
-		const apiProducts = await getProductsAPI(
-			request,
-			"https://beta.wapi.ruparupastg.my.id/product/v2/category/furniture/kursi/kursi-makan.html?size=50&sort=lowestPrice&categoryId=6941&locations=490,910&cityid=910&provinceid=490&brands=157&isRuleBased=false&from=0&lat=-6.243373&lon=106.784425"
-		);
+		const apiProducts = await getProductsAPI(request, "API_URL_NEEDED");
 		await expect(homePage.homepagelocator.Text_HomepageProductName).toHaveCount(
 			apiProducts.length,
 			{ timeout: 20000 }
@@ -69,11 +63,11 @@ test.describe(`Product search and filtering workflow`, () => {
 
 test.describe(`Shopping cart operations`, () => {
 	test.beforeEach(async ({ homePage }) => {
-		await homePage.page.goto("https://beta.www.ruparupastg.my.id/");
+		await homePage.page.goto("BASE_URL_NEEDED");
 	});
 	test(`Scenario #2-1`, async ({ homePage, loginPage, productDetailsPage }) => {
 		await homePage.navigateToLoginPage();
-		await loginPage.performLogin("shimarin@tes.cc", "Abcd1234!");
+		await loginPage.performLogin("USERNAME_NEEDED", "PASSWORD_NEEDED");
 		await homePage.searchProductSKU("X105843");
 		await productDetailsPage.successRedirectToProductDetails();
 	});
@@ -84,7 +78,7 @@ test.describe(`Shopping cart operations`, () => {
 		checkoutPage,
 	}) => {
 		await homePage.navigateToLoginPage();
-		await loginPage.performLogin("shimarin@tes.cc", "Abcd1234!");
+		await loginPage.performLogin("USERNAME_NEEDED", "PASSWORD_NEEDED");
 		await homePage.searchProductSKU("X105843");
 		await productDetailsPage.successRedirectToProductDetails();
 		await productDetailsPage.page.waitForTimeout(5000);
